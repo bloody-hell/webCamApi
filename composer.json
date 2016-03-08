@@ -1,0 +1,17 @@
+{
+  "name": "bloody-hell/webcam-API",
+  "description": "Wrapper for webcamAPI",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Juffin Halli",
+      "email": "juf.halli@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "bloody_hell\\webCamApi\\": ""
+    }
+  }
+}
