@@ -1,5 +1,5 @@
 <?php
-namespace bloody_hell\webCamApi\connectors;
+namespace bloody_hell\webCamApi\parsers;
 
 
 use bloody_hell\webCamApi\IParser;

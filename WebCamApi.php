@@ -2,6 +2,11 @@
 namespace bloody_hell\webCamApi;
 
 
+use bloody_hell\webCamApi\exceptions\EmptyResponseException;
+use bloody_hell\webCamApi\exceptions\Exception;
+use bloody_hell\webCamApi\models\User;
+
+
 class WebCamApi
 {
     /** @var IConnector */
@@ -25,11 +30,13 @@ class WebCamApi
     /**
      * @param $user_id
      *
-     * @return array
+     * @return User
      */
     public function usersGetProfile($user_id)
     {
-        return $this->get('wct.users.get_profile', ['userid' => $user_id]);
+        $data = $this->get('wct.users.get_profile', ['userid' => $user_id]);
+
+        return isset($data['user']) ? new User($data['user']) : null;
     }
 
     /**
@@ -41,6 +48,7 @@ class WebCamApi
      */
     public function usersListFavoriteWebcams($user_id, $per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.users.list_favorite_webcams', [
             'userid'   => $user_id,
             'per_page' => $per_page,
@@ -55,6 +63,7 @@ class WebCamApi
      */
     public function webcamsGetDetails($webcamid)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.get_details', ['webcamid' => $webcamid,]);
     }
 
@@ -65,6 +74,7 @@ class WebCamApi
      */
     public function webcamsGetDetailsMultiple(array $webcamids)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.get_details_multiple', ['webcamids' => $webcamids,]);
     }
 
@@ -77,6 +87,7 @@ class WebCamApi
      */
     public function webcamsLitsComments($webcamid, $per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_comments', [
             'webcamid' => $webcamid,
             'per_page' => $per_page,
@@ -96,6 +107,7 @@ class WebCamApi
      */
     public function webcamsLitsNearby($lat, $lng, $radius = 0.2, $unit = 'deg', $per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_nearby', [
             'lat'      => $lat,
             'lng'      => $lng,
@@ -115,6 +127,7 @@ class WebCamApi
      */
     public function webcamsListByTag($tag, $per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_by_tag', [
             'tag'      => $tag,
             'per_page' => $per_page,
@@ -131,6 +144,7 @@ class WebCamApi
      */
     public function webcamsListByUser($userid, $per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_by_user', [
             'userid'   => $userid,
             'per_page' => $per_page,
@@ -140,6 +154,7 @@ class WebCamApi
 
     public function webcamsListByContinent($continent, $per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_by_continent', [
             'continent' => $continent,
             'per_page'  => $per_page,
@@ -156,6 +171,7 @@ class WebCamApi
      */
     public function webcamsListByCountry($country, $per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_by_country', [
             'country'  => $country,
             'per_page' => $per_page,
@@ -171,6 +187,7 @@ class WebCamApi
      */
     public function webcamsListNew($per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_new', [
             'per_page' => $per_page,
             'page'     => $page,
@@ -185,6 +202,7 @@ class WebCamApi
      */
     public function webcamsListRecent($per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_recent', [
             'per_page' => $per_page,
             'page'     => $page,
@@ -199,6 +217,7 @@ class WebCamApi
      */
     public function webcamsListPopular($per_page = 10, $page = 1)
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_popular', [
             'per_page' => $per_page,
             'page'     => $page,
@@ -213,6 +232,7 @@ class WebCamApi
      */
     public function webcamsListRandom($limit = 1, $type = 'all')
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_random', [
             'limit'  => $limit,
             'type'   => $type,
@@ -227,6 +247,7 @@ class WebCamApi
      */
     public function webcamsListTimelapse($limit = 1, $type = 'all')
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.webcams.list_timelapse', [
             'limit'  => $limit,
             'type'   => $type,
@@ -242,6 +263,7 @@ class WebCamApi
      */
     public function searchWebcams($query, $limit = 1, $type = 'all')
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.search.webcams', [
             'query'  => $query,
             'limit'  => $limit,
@@ -258,6 +280,7 @@ class WebCamApi
      */
     public function searchUsers($query, $limit = 1, $type = 'all')
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.search.users', [
             'query'  => $query,
             'limit'  => $limit,
@@ -274,6 +297,7 @@ class WebCamApi
      */
     public function searchTags($query, $limit = 1, $type = 'all')
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.search.tags', [
             'query'  => $query,
             'limit'  => $limit,
@@ -293,6 +317,7 @@ class WebCamApi
      */
     public function mapBbox($sw_lat, $sw_lng, $ne_lat, $ne_lng, $zoom, $mapapi = 'google')
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.map.bbox', [
             'sw_lat' => $sw_lat,
             'sw_lng' => $sw_lng,
@@ -308,6 +333,7 @@ class WebCamApi
      */
     public function countriesList()
     {
+        // TODO: model object should return instead of array
         return $this->get('wct.countries.list', []);
     }
 
@@ -316,9 +342,31 @@ class WebCamApi
      * @param array $data
      *
      * @return array
+     *
+     * @throws Exception
      */
     private function get($method, array $data)
     {
-        return $this->_parser->parse($this->_connector->call($method, $this->_parser->getName(), $data));
+        $data = $this->_parser->parse($this->_connector->call($method, $this->_parser->getName(), $data));
+
+        if(!isset($data['status'])) {
+            throw new EmptyResponseException();
+        }
+
+        if($data['status'] === 'fail') {
+
+            // Specific error codes may be processed with special exception for better error handling
+
+            throw new Exception(
+                isset($data['error']['description']) ? $data['error']['description'] : null,
+                isset($data['error']['code']) ? $data['error']['code'] : null
+            );
+        }
+
+        if($data['status'] !== 'ok') {
+            throw new Exception('Unknown response status');
+        }
+
+        return $data;
     }
 }
